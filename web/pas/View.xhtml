@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPasLabel_pasId}"/>
+                    <h:outputText value="#{pasController.selected.pasId}" title="#{bundle.ViewPasTitle_pasId}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_ime}"/>
+                    <h:outputText value="#{pasController.selected.ime}" title="#{bundle.ViewPasTitle_ime}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_datumstenjenja}"/>
+                    <h:outputText value="#{pasController.selected.datumstenjenja}" title="#{bundle.ViewPasTitle_datumstenjenja}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPasLabel_rasa}"/>
+                    <h:outputText value="#{pasController.selected.rasa}" title="#{bundle.ViewPasTitle_rasa}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_brojMikrocipa}"/>
+                    <h:outputText value="#{pasController.selected.brojMikrocipa}" title="#{bundle.ViewPasTitle_brojMikrocipa}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_majka}"/>
+                    <h:outputText value="#{pasController.selected.majka}" title="#{bundle.ViewPasTitle_majka}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_otac}"/>
+                    <h:outputText value="#{pasController.selected.otac}" title="#{bundle.ViewPasTitle_otac}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_potomci}"/>
+                    <h:outputText value="#{pasController.selected.potomci}" title="#{bundle.ViewPasTitle_potomci}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_sampionati}"/>
+                    <h:outputText value="#{pasController.selected.sampionati}" title="#{bundle.ViewPasTitle_sampionati}"/>
+                    <h:outputText value="#{bundle.ViewPasLabel_usersId}"/>
+                    <h:outputText value="#{pasController.selected.usersId}" title="#{bundle.ViewPasTitle_usersId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pasController.destroyAndView}" value="#{bundle.ViewPasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPasEditLink}"/>
+                <br />
+                <h:commandLink action="#{pasController.prepareCreate}" value="#{bundle.ViewPasCreateLink}" />
+                <br />
+                <h:commandLink action="#{pasController.prepareList}" value="#{bundle.ViewPasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPasEmpty}" rendered="#{pasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{pasController.items.rowCount > 0}">
+                    <h:outputText value="#{pasController.pagination.pageFirstItem + 1}..#{pasController.pagination.pageLastItem + 1}/#{pasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{pasController.previous}" value="#{bundle.Previous} #{pasController.pagination.pageSize}" rendered="#{pasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{pasController.next}" value="#{bundle.Next} #{pasController.pagination.pageSize}" rendered="#{pasController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{pasController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_pasId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pasId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_ime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_datumstenjenja}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datumstenjenja}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_rasa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rasa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_brojMikrocipa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.brojMikrocipa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_majka}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.majka}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_otac}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.otac}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_potomci}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.potomci}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_sampionati}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sampionati}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPasTitle_usersId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usersId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{pasController.prepareView}" value="#{bundle.ListPasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{pasController.prepareEdit}" value="#{bundle.ListPasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{pasController.destroy}" value="#{bundle.ListPasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{pasController.prepareCreate}" value="#{bundle.ListPasCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

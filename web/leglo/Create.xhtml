@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLegloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLegloLabel_legloId}" for="legloId" />
+                    <h:inputText id="legloId" value="#{legloController.selected.legloId}" title="#{bundle.CreateLegloTitle_legloId}" required="true" requiredMessage="#{bundle.CreateLegloRequiredMessage_legloId}"/>
+                    <h:outputLabel value="#{bundle.CreateLegloLabel_datumstenjenja}" for="datumstenjenja" />
+                    <h:inputText id="datumstenjenja" value="#{legloController.selected.datumstenjenja}" title="#{bundle.CreateLegloTitle_datumstenjenja}" required="true" requiredMessage="#{bundle.CreateLegloRequiredMessage_datumstenjenja}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateLegloLabel_otac}" for="otac" />
+                    <h:inputText id="otac" value="#{legloController.selected.otac}" title="#{bundle.CreateLegloTitle_otac}" required="true" requiredMessage="#{bundle.CreateLegloRequiredMessage_otac}"/>
+                    <h:outputLabel value="#{bundle.CreateLegloLabel_majka}" for="majka" />
+                    <h:inputText id="majka" value="#{legloController.selected.majka}" title="#{bundle.CreateLegloTitle_majka}" required="true" requiredMessage="#{bundle.CreateLegloRequiredMessage_majka}"/>
+                    <h:outputLabel value="#{bundle.CreateLegloLabel_usersId}" for="usersId" />
+                    <h:selectOneMenu id="usersId" value="#{legloController.selected.usersId}" title="#{bundle.CreateLegloTitle_usersId}" >
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{legloController.create}" value="#{bundle.CreateLegloSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{legloController.prepareList}" value="#{bundle.CreateLegloShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateLegloIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
