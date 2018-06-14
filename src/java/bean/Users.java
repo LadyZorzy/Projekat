@@ -29,15 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "users")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByUsersId", query = "SELECT u FROM Users u WHERE u.usersId = :usersId")
-    , @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByIme", query = "SELECT u FROM Users u WHERE u.ime = :ime")
-    , @NamedQuery(name = "Users.findByPrezime", query = "SELECT u FROM Users u WHERE u.prezime = :prezime")
-    , @NamedQuery(name = "Users.findByZemlja", query = "SELECT u FROM Users u WHERE u.zemlja = :zemlja")
-    , @NamedQuery(name = "Users.findByGrad", query = "SELECT u FROM Users u WHERE u.grad = :grad")})
+
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,16 +38,19 @@ public class Users implements Serializable {
     @NotNull
     @Column(name = "USERS_ID")
     private Integer usersId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "USERNAME")
     private String username;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "PASSWORD")
     private String password;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -66,23 +61,29 @@ public class Users implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "PREZIME")
     private String prezime;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "ZEMLJA")
     private String zemlja;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "GRAD")
     private String grad;
+    
     @OneToMany(mappedBy = "usersId")
     private List<Leglo> legloList;
+    
     @OneToMany(mappedBy = "usersId")
     private List<Pas> pasList;
+    
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
     @ManyToOne
     private Role roleId;
+    
 
     public Users() {
     }

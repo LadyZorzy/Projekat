@@ -29,12 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "leglo")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Leglo.findAll", query = "SELECT l FROM Leglo l")
-    , @NamedQuery(name = "Leglo.findByLegloId", query = "SELECT l FROM Leglo l WHERE l.legloId = :legloId")
-    , @NamedQuery(name = "Leglo.findByDatumstenjenja", query = "SELECT l FROM Leglo l WHERE l.datumstenjenja = :datumstenjenja")
-    , @NamedQuery(name = "Leglo.findByOtac", query = "SELECT l FROM Leglo l WHERE l.otac = :otac")
-    , @NamedQuery(name = "Leglo.findByMajka", query = "SELECT l FROM Leglo l WHERE l.majka = :majka")})
+
 public class Leglo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,21 +38,25 @@ public class Leglo implements Serializable {
     @NotNull
     @Column(name = "LEGLO_ID")
     private Integer legloId;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "DATUMSTENJENJA")
     @Temporal(TemporalType.DATE)
     private Date datumstenjenja;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "OTAC")
     private String otac;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "MAJKA")
     private String majka;
+
     @JoinColumn(name = "USERS_ID", referencedColumnName = "USERS_ID")
     @ManyToOne
     private Users usersId;
@@ -117,28 +116,8 @@ public class Leglo implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (legloId != null ? legloId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Leglo)) {
-            return false;
-        }
-        Leglo other = (Leglo) object;
-        if ((this.legloId == null && other.legloId != null) || (this.legloId != null && !this.legloId.equals(other.legloId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "bean.Leglo[ legloId=" + legloId + " ]";
     }
-    
+
 }

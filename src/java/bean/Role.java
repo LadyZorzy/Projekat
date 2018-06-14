@@ -27,10 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "role")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
-    , @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId")
-    , @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
+
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,11 +36,13 @@ public class Role implements Serializable {
     @NotNull
     @Column(name = "ROLE_ID")
     private Integer roleId;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "ROLE_NAME")
     private String roleName;
+
     @OneToMany(mappedBy = "roleId")
     private List<Users> usersList;
 
@@ -85,28 +84,8 @@ public class Role implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (roleId != null ? roleId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
-            return false;
-        }
-        Role other = (Role) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Ime role[ " + roleName + " ]";
     }
-    
+
 }
